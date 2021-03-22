@@ -79,4 +79,5 @@ Procedure for testing models using custom configurations:
 		- `model_definition` -> name of the saved model folder (usually in format YYYYMMDD-HHMM _`config_name`)
 3. The statistics for the dice metrics (and angular distance between illuminants for se frameworks) will be saved in the `config_folder`/results/YYYYMMDD-HHMM_`config_name` folder 
 
-
+*****
+To recreate results that are described in the progress report and presentations, use the provided trained models (there is one trained model for each reported result for each type of model/framework), with changing only the `dataset_path` in `[train]`, `[valid]` and `[test]` sections of the training configuration files.
