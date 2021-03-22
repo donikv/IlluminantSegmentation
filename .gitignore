@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# training data
+training/*/logs/
+training/*/model/
+pretrained/*/model/
+pretrained/places365_model/
+models/
