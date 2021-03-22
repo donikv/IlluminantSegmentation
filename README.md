@@ -14,14 +14,14 @@ To create this environment use `conda env create -f env.yml`. (requires anaconda
 	- processing -> image preprocessing and augmentation
 	- utils -> general purpose utility funcitons
 	- datasets -> definitions of all dataset functions to load various models
-	- model -> definitions and classes for parsing custom models loaded from configuration (see [Model definition])
+	- model -> definitions and classes for parsing custom models loaded from configuration (see [Model definitions](#model-definitions))
 * Segmentation -> Training and testing of segmentation models
 	- patch -> patch based segmentation
 	- gmm -> guassian mixture model segmentation
 	- nn -> code to load and train/test cnn segmentation models from custom configurations
 	- segmentation\_estimation\_frameworks code to load and train/test cnn segmentation models from custom configurations
 
-## Model definitions
+## [Model definitions](#model-definitions)
 -----
 Deep Models are defined using simple custom configuration files. The config files are used with the `CustomModel` class to create tensorflow models. The list of all implemented custom layers can be found in the `CustomModel.py` file. The definitions of models can be found in the `custom_models` folder. Pretrained and trained models can be found in `pretrained` and `training` folders respectively. 
 *****
@@ -49,12 +49,19 @@ Procedure for training new models using custom configurations:
 
 ## Testing
 
-To test the random forrest patch classifier run `segmentation/patch/test.py` script with arguments: `dataset_path` -> path to the dataset, `dataset_list` -> name of the list of images to be used for testing, `model_definition` -> path to the saved classifier file. To recreate the reported results call the script:
+To test the random forrest patch classifier run `segmentation/patch/test.py` script with arguments: 
+- `dataset_path` -> path to the dataset, 
+- `dataset_list` -> name of the list of images to be used for testing, 
+- `model_definition` -> path to the saved classifier file.
+To recreate the reported results call the script:
 ```
 $ python segmenatation/patch/test.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt --model_path=models/classifiers/rand_forrest_14_12_all_outdoor.joblib
 ```
 
-To test the gmm segmentation run `segmenation/gmm/test_clf_hist_seg.py` with arguments: `dataset_path` -> path to the dataset, `dataset_list` -> name of the list of images to be used for testing. This will run the model with Places365 classification of indoor/outdoor scenes and gmm segmentation. To recreate the reported results call the script:
+To test the gmm segmentation run `segmenation/gmm/test_clf_hist_seg.py` with arguments: 
+- `dataset_path` -> path to the dataset, 
+- `dataset_list` -> name of the list of images to be used for testing. 
+This will run the model with Places365 classification of indoor/outdoor scenes and gmm segmentation. To recreate the reported results call the script:
 
 ```
 $ python segmenatation/patch/test_clf_hist_seg.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt
