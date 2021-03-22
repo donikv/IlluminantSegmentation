@@ -5,6 +5,7 @@
 
 #### Dependancies:  
 * Tensorflow 2.4
+
 All of the other dependancies are listed in the exported env.yml file of the anaconda environment. 
 To create this environment use `conda env create -f env.yml`. (requires anaconda or miniconda) 
 
