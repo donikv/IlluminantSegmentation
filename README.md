@@ -1,5 +1,5 @@
-#YEAR 1: Track 1
-#Segmentation
+# YEAR 1: Track 1
+# Segmentation
 
 ## Project Structure
 
