@@ -20,7 +20,7 @@ To create this environment use `conda env create -f env.yml`. (requires anaconda
 	- patch -> patch based segmentation
 	- gmm -> guassian mixture model segmentation
 	- nn -> code to load and train/test cnn segmentation models from custom configurations
-	- segmentation\_estimation\_frameworks code to load and train/test cnn segmentation models from custom configurations
+	- segmentation\_estimation\_frameworks -> code to load and train/test framework models from custom configurations
 
 ## [Model definitions](#model-definitions)
 -----
