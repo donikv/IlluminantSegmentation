@@ -9,17 +9,17 @@ All of the other dependancies are listed in the exported env.yml file of the ana
 To create this environment use `conda env create -f env.yml`. (requires anaconda or miniconda) 
 
 #### Structure
-	* general -> general purpose utility functions and classes used by all other classes
-		- training -> losses and metrics definitions
-		- processing -> image preprocessing and augmentation
-		- utils -> general purpose utility funcitons
-		- datasets -> definitions of all dataset functions to load various models
-		- model -> definitions and classes for parsing custom models loaded from configuration (see [Model definition])
-	* Segmentation -> Training and testing of segmentation models
-		- patch -> patch based segmentation
-		- gmm -> guassian mixture model segmentation
-		- nn -> code to load and train/test cnn segmentation models from custom configurations
-		- segmentation\_estimation\_frameworks code to load and train/test cnn segmentation models from custom configurations
+* general -> general purpose utility functions and classes used by all other classes
+	- training -> losses and metrics definitions
+	- processing -> image preprocessing and augmentation
+	- utils -> general purpose utility funcitons
+	- datasets -> definitions of all dataset functions to load various models
+	- model -> definitions and classes for parsing custom models loaded from configuration (see [Model definition])
+* Segmentation -> Training and testing of segmentation models
+	- patch -> patch based segmentation
+	- gmm -> guassian mixture model segmentation
+	- nn -> code to load and train/test cnn segmentation models from custom configurations
+	- segmentation\_estimation\_frameworks code to load and train/test cnn segmentation models from custom configurations
 
 ## Model definitions
 
@@ -37,15 +37,15 @@ To train the random forrest patch classifier run segmentation/patch/main.py scri
 ### Deep neural networks
 
 Procedure for training new models using custom configurations:
-	1. Define a new model using custom configuration files or use one of the current model configurations
-	2. Create a new training configuration or change one of the existing ones. In order to use existing training configurations as is, you must change the dataset_path entries in [train] and [valid] sections of the config.
-	3. 
-		** To train deep segmentation models use `unet_custom_train.py` script with arguments:
-		`config_folder` -> path to the training configuration folder
-		** To train one of the frameworks use `segmentation_estimation_frameworks/main.py` script with arguments:
-		`config_folder` -> path to the training configuration folder
-		`config_name` -> name of the configuration file
-	4. The models will be saved in the `<config_folder>/models/YYYYMMDD-HHMM_<config_name>` folder 
+1. Define a new model using custom configuration files or use one of the current model configurations
+2. Create a new training configuration or change one of the existing ones. In order to use existing training configurations as is, you must change the dataset_path entries in [train] and [valid] sections of the config.
+3. 
+	** To train deep segmentation models use `unet_custom_train.py` script with arguments:
+	`config_folder` -> path to the training configuration folder
+	** To train one of the frameworks use `segmentation_estimation_frameworks/main.py` script with arguments:
+	`config_folder` -> path to the training configuration folder
+	`config_name` -> name of the configuration file
+4. The models will be saved in the `<config_folder>/models/YYYYMMDD-HHMM_<config_name>` folder 
 
 ## Testing
 
@@ -61,15 +61,15 @@ $ python segmenatation/patch/test_clf_hist_seg.py --dataset_path=<PATH TO DATASE
 ```
 
 Procedure for testing models using custom configurations:
-	1. Select the configuration used for training and change dataset_path entry in [test] section. Everything else should remain as it was during training.
-	2. 
-		** To test deep segmentation models use `unet_custom_test.py` script with arguments:
-		`config_folder` -> path to the training configuration folder
-		`training_instance` -> name of the saved model folder (usually in format YYYYMMDD-HHMM)
-		** To train one of the frameworks use `segmentation_estimation_frameworks/test.py` script with arguments:
-		`config_folder` -> path to the training configuration folder
-		`training_instance` -> name of the configuration file
-		`model_definition` -> name of the saved model folder (usually in format YYYYMMDD-HHMM _`config_name`)
-	3. The statistics for the dice metrics (and angular distance between illuminants for se frameworks) will be saved in the `config_folder`/results/YYYYMMDD-HHMM_`config_name` folder 
+1. Select the configuration used for training and change dataset_path entry in [test] section. Everything else should remain as it was during training.
+2. 
+	** To test deep segmentation models use `unet_custom_test.py` script with arguments:
+	`config_folder` -> path to the training configuration folder
+	`training_instance` -> name of the saved model folder (usually in format YYYYMMDD-HHMM)
+	** To train one of the frameworks use `segmentation_estimation_frameworks/test.py` script with arguments:
+	`config_folder` -> path to the training configuration folder
+	`training_instance` -> name of the configuration file
+	`model_definition` -> name of the saved model folder (usually in format YYYYMMDD-HHMM _`config_name`)
+3. The statistics for the dice metrics (and angular distance between illuminants for se frameworks) will be saved in the `config_folder`/results/YYYYMMDD-HHMM_`config_name` folder 
 
 
