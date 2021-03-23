@@ -50,24 +50,27 @@ Procedure for training new models using custom configurations:
 
 ## Testing
 
+### Patch based classification
 To test the random forrest patch classifier run `segmentation/patch/test.py` script with arguments: 
 - `dataset_path` -> path to the dataset, 
 - `dataset_list` -> name of the list of images to be used for testing, 
 - `model_definition` -> path to the saved classifier file.
 To recreate the reported results call the script:
 ```
-$ python segmenatation/patch/test.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt --model_path=models/classifiers/rand_forrest_14_12_all_outdoor.joblib
+$ python segmentation/patch/test.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt --model_path=models/classifiers/rand_forrest_14_12_all_outdoor.joblib
 ```
 
+### Clustering
 To test the gmm segmentation run `segmenation/gmm/test_clf_hist_seg.py` with arguments: 
 - `dataset_path` -> path to the dataset, 
 - `dataset_list` -> name of the list of images to be used for testing. 
 This will run the model with Places365 classification of indoor/outdoor scenes and gmm segmentation. To recreate the reported results call the script:
 
 ```
-$ python segmenatation/patch/test_clf_hist_seg.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt
+$ python segmentation/patch/test_clf_hist_seg.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt
 ```
 
+### Deep model
 Procedure for testing models using custom configurations:
 1. Select the configuration used for training and change dataset_path entry in [test] section. Everything else should remain as it was during training.
 2. 
@@ -77,8 +80,24 @@ Procedure for testing models using custom configurations:
 	* To train one of the frameworks use `segmentation_estimation_frameworks/test.py` script with arguments:
 		- `config_folder` -> path to the training configuration folder
 		- `training_instance` -> name of the configuration file
-		- `model_definition` -> name of the saved model folder (usually in format YYYYMMDD-HHMM _`config_name`)
+		- `training_instance` -> name of the saved model folder (usually in format YYYYMMDD-HHMM _`config_name`)
 3. The statistics for the dice metrics (and angular distance between illuminants for se frameworks) will be saved in the `config_folder`/results/YYYYMMDD-HHMM_`config_name` folder 
 
 *****
 To recreate results that are described in the progress report and presentations, use the provided trained models (there is one trained model for each reported result for each type of model/framework), with changing only the `dataset_path` in `[train]`, `[valid]` and `[test]` sections of the training configuration files.
+
+| Model name | Model type | Command to run|
+| :--------: | :--------: | :------------:|
+| GMM        | Clustering | `$ python segmentation/patch/test_clf_hist_seg.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt` |
+| RF         | Patch classification | `$ python segmentation/patch/test.py --dataset_path=<PATH TO DATASET FOLDER> --dataset_list=list_outdoor.txt --model_path=models/classifiers/rand_forrest_14_12_all_outdoor.joblib` |
+| FPN RBF    | Deep model | `$ python segmentation/nn/custom_unet_test.py --config_folder=training/outdoor_fpn_small_clustering/ --training_instance=20210319-1035` |
+| FPN | Deep model | `$ python segmentation/nn/custom_unet_test.py --config_folder=training/outdoor_fpn4_small_reg/ --training_instance=20210319-1035` |
+| SEFPN | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/se_small/ --training_instance=20210315-2235_training --config_name=training` |
+| ESEFPN | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/ese_outdoor/ --training_instance=20210318-1254_training_small --config_name=training_small` |
+| RESEFPN | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/rese_realworld_small/ --training_instance=20210306-0931_training --config_name=training` |
+| RESE3FPN | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/rese_realworld_small/20210306-1420_training3 --training_instance=20210306-1420_training3 --config_name=training3` |
+| UNET | Deep model | `$ python segmentation/nn/custom_unet_test.py --config_folder=training/outdoor_vgg16_unet_reg/ --training_instance=20210305-0920` |
+| SEUNET | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/se1/ --training_instance=20210313-1656_training_new --config_name=training_new` |
+| ESEUNET | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/ese_outdoor/ --training_instance=20210317-2239_training --config_name=training` |
+| RESEUNET | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/rese_realworld2/ --training_instance=20210313-2227_training_new2 --config_name=training_new2` |
+| RESE3UNET | Deep model | `$ python segmentation/segmentation_estimation_frameworks/test.py --config_folder=training/rese_realworld3/ --training_instance=20210314-1606_training_new2 --config_name=training_new2` |
